@@ -15,11 +15,36 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import CreateView, DetailsView
+from .views import MachineView, MachineDetailsView, PlaceView, PlaceDetailsView, MachineUserView, MachineUserDetailsView, ReservationView, ReservationDetailsView, FailureView, FailureDetailsView, UserguideView, UserguideDetailsView, AlternativeView, AlternativeDetailsView
 
 urlpatterns = {
-    url(r'^machine/$', CreateView.as_view(), name="create"),
-	url(r'^machine/(?P<pk>[0-9]+)/$', DetailsView.as_view(), name="details"),
+    url(r'^machine/$', MachineView.as_view(), name="create"),
+    url(r'^machine/(?P<pk>[0-9]+)/$', MachineDetailsView.as_view(), name="details"),
+
+
+    url(r'^place/$', PlaceView.as_view(), name="create"),
+    url(r'^place/(?P<pk>[0-9]+)/$', PlaceDetailsView.as_view(), name="details"),
+
+
+    url(r'^machineuser/$', MachineUserView.as_view(), name="create"),
+    url(r'^machineuser/(?P<pk>[0-9]+)/$', MachineUserDetailsView.as_view(), name="details"),
+
+
+    url(r'^reservation/$', ReservationView.as_view(), name="create"),
+    url(r'^reservation/(?P<pk>[0-9]+)/$', ReservationDetailsView.as_view(), name="details"),
+
+
+    url(r'^failure/$', FailureView.as_view(), name="create"),
+    url(r'^failure/(?P<pk>[0-9]+)/$', FailureDetailsView.as_view(), name="details"),
+
+
+    url(r'^userguide/$', UserguideView.as_view(), name="create"),
+    url(r'^userguide/(?P<pk>[0-9]+)/$', UserguideDetailsView.as_view(), name="details"),
+
+
+    url(r'^alternative/$', AlternativeView.as_view(), name="create"),
+    url(r'^alternative/(?P<pk>[0-9]+)/$', AlternativeDetailsView.as_view(), name="details"),
+
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

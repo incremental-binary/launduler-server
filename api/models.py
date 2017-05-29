@@ -13,7 +13,7 @@ class Machine(models.Model):
 
     def __str__(self):
         """Return a human readable representation of the model instance."""
-        return "{}".format(self.name)
+        return "{}".format(self.serialNum)
 
 class Failure(models.Model):
     """This class represents the failure model."""
@@ -24,7 +24,7 @@ class Failure(models.Model):
     isFixed = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{}".format(self.machine)
 
 class Userguide(models.Model):
     """This class represents the userguide model."""
@@ -32,7 +32,7 @@ class Userguide(models.Model):
     content = models.TextField()
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{}".format(self.guideName)
 
 class Alternative(models.Model):
     """This class represents the alternative service model."""
@@ -42,4 +42,35 @@ class Alternative(models.Model):
     price = models.CharField(max_length=255)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{}".format(self.serviceName)
+
+
+class Place(models.Model):
+    """This class represents the place model."""
+    location = models.CharField(max_length=255, blank=False, unique=True)
+
+    # ps. We have to decide data type, how to represent
+    operationTime = models.CharField(max_length=255)
+    def __str__(self):
+        return "{}".format(self.location)
+
+class MachineUser(models.Model):
+    """This class represents the alternative service model."""
+    userId = models.CharField(max_length=255, blank=False, unique=True)
+    email = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+
+    def __str__(self):
+        return "{}".format(self.userId)
+
+class Reservation(models.Model):
+    """This class represents the alternative service model."""
+    machine = models.CharField(max_length=255, blank=False, unique=True)
+    date = models.CharField(max_length=255)
+    userId = models.CharField(max_length=255, blank=False, unique=True)
+
+    def __str__(self):
+        return "{}".format(self.machine)
+
