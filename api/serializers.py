@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 from .models import Machine, Failure, Userguide, Alternative, Place, MachineUser, Reservation
+from rest_auth.registration.serializers import RegisterSerializer
 
 class MachineSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
@@ -44,4 +45,13 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = Reservation
         fields = ('id', 'machine', 'date', 'userId')
 
+#class RegistrationSerializer(RegisterSerializer):
+    #first_name = serializers.CharField(required=True)
+    #last_name = serializers.CharField(required=True)
 
+#    def get_cleaned_data(self):
+#        return {
+#            'username': self.validated_data.get('username', ''),
+#            'password': self.validated_data.get('password', ''),
+#            'email': self.validated_data.get('email', '')
+#        }

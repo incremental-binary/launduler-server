@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from .serializers import MachineSerializer, PlaceSerializer, MachineUserSerializer, ReservationSerializer, FailureSerializer, UserguideSerializer, AlternativeSerializer
 from .models import Machine, Place, MachineUser,Reservation, Failure, Userguide, Alternative
@@ -10,6 +10,7 @@ from .models import Machine, Place, MachineUser,Reservation, Failure, Userguide,
 # Create your views here.
 class MachineView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = Machine.objects.all()
     serializer_class = MachineSerializer
 
@@ -19,17 +20,14 @@ class MachineView(generics.ListCreateAPIView):
 
 class MachineDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Machine.objects.all()
     serializer_class = MachineSerializer
 
-
-
-
-
-
 class PlaceView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
 
@@ -39,16 +37,14 @@ class PlaceView(generics.ListCreateAPIView):
 
 class PlaceDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
 
-
-
-
-
 class MachineUserView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = MachineUser.objects.all()
     serializer_class = MachineUserSerializer
 
@@ -58,17 +54,14 @@ class MachineUserView(generics.ListCreateAPIView):
 
 class MachineUserDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = MachineUser.objects.all()
     serializer_class = MachineUserSerializer
 
-
-
-
-
-
 class ReservationView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
@@ -78,16 +71,14 @@ class ReservationView(generics.ListCreateAPIView):
 
 class ReservationDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
-
-
-
-
 class FailureView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = Failure.objects.all()
     serializer_class = FailureSerializer
 
@@ -97,16 +88,14 @@ class FailureView(generics.ListCreateAPIView):
 
 class FailureDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Failure.objects.all()
     serializer_class = FailureSerializer
 
-
-
-
-
 class UserguideView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
     queryset = Userguide.objects.all()
     serializer_class = UserguideSerializer
 
@@ -116,18 +105,15 @@ class UserguideView(generics.ListCreateAPIView):
 
 class UserguideDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
-
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Userguide.objects.all()
     serializer_class = UserguideSerializer
 
-
-
-
-
-
-
 class AlternativeView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
+    # permission_classes = (IsAuthenticated,)
+ 
     queryset = Alternative.objects.all()
     serializer_class = AlternativeSerializer
 
@@ -137,6 +123,7 @@ class AlternativeView(generics.ListCreateAPIView):
 
 class AlternativeDetailsView(generics.RetrieveUpdateDestroyAPIView):
     """This class handles the http GET, PUT and DELETE requests."""
+    # permission_classes = (IsAuthenticated,)
 
     queryset = Alternative.objects.all()
     serializer_class = AlternativeSerializer

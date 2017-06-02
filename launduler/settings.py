@@ -25,8 +25,37 @@ SECRET_KEY = 'rr$!sn3+a!bz*g#ud$ravau*9e*u@mh5y-7ww)22trk3h+q11!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+REST_FRAMEWORK = {
+    #'DEFAULT_PERMISSION_CLASSES': (
+    #    'rest_framework.permissions.IsAuthenticated',
+    #),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+#REST_AUTH_REGISTER_SERIALIZERS = {
+#    'REGISTER_SERIALIZER': 'api.serializers.RegistrationSerializer'
+#}
+
+#DJANGO-AUTH SETTING FILE
+#This is required otherwise it asks for email server
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True   
+ACCOUNT_USERNAME_REQUIRED = False
+
+#Following is added to enable registration with email instead of username
+AUTHENTICATION_BACKENDS = (
+# Needed to login by username in Django admin, regardless of `allauth`
+"django.contrib.auth.backends.ModelBackend",
+
+#`allauth` specific authentication methods, such as login by e-mail
+"allauth.account.auth_backends.AuthenticationBackend", 
+)
 
 # Application definition
 
@@ -38,8 +67,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'api',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
