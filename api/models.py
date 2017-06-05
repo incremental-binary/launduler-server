@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 class Machine(models.Model):
     """This class represents the machine model."""
-    serialNum = models.CharField(max_length=255, blank=False, unique=True)
+    serialNum = models.CharField(max_length=255, blank=False)
     location = models.CharField(max_length=255, blank=False, default='none')
     inUse = models.BooleanField(default=False)
     isBroken = models.BooleanField(default=False)
@@ -28,7 +28,7 @@ class Failure(models.Model):
 
 class Userguide(models.Model):
     """This class represents the userguide model."""
-    guideName = models.CharField(max_length=255, blank=False, default='none')
+    guideName = models.CharField(max_length=255, blank=False, unique=True, default='none')
     content = models.TextField()
 
     def __str__(self):
@@ -36,7 +36,7 @@ class Userguide(models.Model):
 
 class Alternative(models.Model):
     """This class represents the alternative service model."""
-    serviceName = models.CharField(max_length=255, blank=False, default='none')
+    serviceName = models.CharField(max_length=255, blank=False, unique=True, default='none')
     location = models.CharField(max_length=255)
     phoneNum = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
@@ -57,7 +57,7 @@ class Place(models.Model):
 class MachineUser(models.Model):
     """This class represents the alternative service model."""
     userId = models.CharField(max_length=255, blank=False, unique=True)
-    email = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
@@ -67,9 +67,9 @@ class MachineUser(models.Model):
 
 class Reservation(models.Model):
     """This class represents the alternative service model."""
-    machine = models.CharField(max_length=255, blank=False, unique=True)
+    machine = models.CharField(max_length=255, blank=False)
     date = models.CharField(max_length=255)
-    userId = models.CharField(max_length=255, blank=False, unique=True)
+    userId = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
         return "{}".format(self.machine)
