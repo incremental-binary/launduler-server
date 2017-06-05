@@ -41,7 +41,7 @@ class Reservation(models.Model):
     """This class represents the alternative service model."""
     machine = models.ForeignKey(Machine, to_field="serialNum")
     date = models.CharField(max_length=255)
-    userId = models.ForeignKey(MachineUser, to_field="userId")
+    userId = models.ForeignKey('auth.user', to_field="username")
 
     def __str__(self):
         return "{}".format(self.machine)
@@ -51,7 +51,7 @@ class Failure(models.Model):
     machine = models.ForeignKey(Machine, to_field="serialNum")
     type = models.CharField(max_length=255, blank=False, default='none')
     comment = models.TextField()
-    reporterId = models.ForeignKey(MachineUser, to_field="userId")
+    reporterId = models.ForeignKey('auth.user', to_field="username")
     isFixed = models.BooleanField(default=False)
 
     def __str__(self):
