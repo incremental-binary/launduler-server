@@ -67,10 +67,9 @@ class Userguide(models.Model):
 
 class Alternative(models.Model):
     """This class represents the alternative service model."""
-    serviceName = models.CharField(max_length=255, blank=False, unique=True, default='none')
-    location = models.CharField(max_length=255)
-    phoneNum = models.CharField(max_length=255)
-    price = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=False, unique=True, default='none')
+    description = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
 
     def __str__(self):
         return "{}".format(self.serviceName)
