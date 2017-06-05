@@ -4,10 +4,22 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+
+class Place(models.Model):
+    """This class represents the place model."""
+    location = models.CharField(max_length=255, blank=False, unique=True)
+
+    # ps. We have to decide data type, how to represent
+    operationTime = models.CharField(max_length=255)
+    def __str__(self):
+        return "{}".format(self.location)
+
+
 class Machine(models.Model):
     """This class represents the machine model."""
     serialNum = models.CharField(max_length=255, blank=False)
-    location = models.CharField(max_length=255, blank=False, default='none')
+    #location = models.CharField(max_length=255, blank=False, default='none')
+    location = models.ForeignKey(Place, to_field="location")
     inUse = models.BooleanField(default=False)
     isBroken = models.BooleanField(default=False)
 
@@ -43,16 +55,6 @@ class Alternative(models.Model):
 
     def __str__(self):
         return "{}".format(self.serviceName)
-
-
-class Place(models.Model):
-    """This class represents the place model."""
-    location = models.CharField(max_length=255, blank=False, unique=True)
-
-    # ps. We have to decide data type, how to represent
-    operationTime = models.CharField(max_length=255)
-    def __str__(self):
-        return "{}".format(self.location)
 
 class MachineUser(models.Model):
     """This class represents the alternative service model."""
