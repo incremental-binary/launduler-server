@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import MachineView, MachineDetailsView, PlaceView, PlaceDetailsView, MachineUserView, MachineUserDetailsView, ReservationView, ReservationDetailsView, FailureView, FailureDetailsView, UserguideView, UserguideDetailsView, AlternativeView, AlternativeDetailsView
+from .views import MachineView, MachineDetailsView, PlaceView, PlaceDetailsView, ReservationView, ReservationDetailsView, FailureView, FailureDetailsView, UserguideView, UserguideDetailsView, AlternativeView, AlternativeDetailsView
 
 urlpatterns = {
     url(r'^machine/$', MachineView.as_view(), name="create"),
@@ -26,8 +26,8 @@ urlpatterns = {
     url(r'^place/(?P<pk>[0-9]+)/$', PlaceDetailsView.as_view(), name="details"),
 
 
-    url(r'^machineuser/$', MachineUserView.as_view(), name="create"),
-    url(r'^machineuser/(?P<pk>[0-9]+)/$', MachineUserDetailsView.as_view(), name="details"),
+#    url(r'^machineuser/$', MachineUserView.as_view(), name="create"),
+#    url(r'^machineuser/(?P<pk>[0-9]+)/$', MachineUserDetailsView.as_view(), name="details"),
 
 
     url(r'^reservation/$', ReservationView.as_view(), name="create"),

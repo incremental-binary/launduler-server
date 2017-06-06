@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from rest_framework import serializers
-from .models import Machine, Failure, Userguide, Alternative, Place, MachineUser, Reservation
+from .models import Machine, Failure, Userguide, Alternative, Place, Reservation
 from rest_auth.registration.serializers import RegisterSerializer
 
 class MachineSerializer(serializers.ModelSerializer):
@@ -35,10 +35,10 @@ class PlaceSerializer(serializers.ModelSerializer):
         model = Place
         fields = ('id', 'location', 'operationTime')
 
-class MachineUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MachineUser
-        fields = ('id', 'userId', 'email', 'password', 'name', 'location')
+#class MachineUserSerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = MachineUser
+#        fields = ('id', 'userId', 'email', 'password', 'name', 'location')
 
 class ReservationSerializer(serializers.ModelSerializer):
 

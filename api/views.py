@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
-from .serializers import MachineSerializer, PlaceSerializer, MachineUserSerializer, ReservationSerializer, FailureSerializer, UserguideSerializer, AlternativeSerializer
-from .models import Machine, Place, MachineUser,Reservation, Failure, Userguide, Alternative
+from .serializers import MachineSerializer, PlaceSerializer, ReservationSerializer, FailureSerializer, UserguideSerializer, AlternativeSerializer
+from .models import Machine, Place,Reservation, Failure, Userguide, Alternative
 
 # Create your views here.
 class MachineView(generics.ListCreateAPIView):
@@ -69,22 +69,22 @@ class PlaceDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
 
-class MachineUserView(generics.ListCreateAPIView):
-    """This class defines the create behavior of our rest api."""
-    permission_classes = (IsAuthenticated,)
-    queryset = MachineUser.objects.all()
-    serializer_class = MachineUserSerializer
+#class MachineUserView(generics.ListCreateAPIView):
+#    """This class defines the create behavior of our rest api."""
+#    permission_classes = (IsAuthenticated,)
+#    queryset = MachineUser.objects.all()
+#    serializer_class = MachineUserSerializer
+#
+#    def perform_create(self, serializer):
+#        """Save the post data when creating a new MachineUser."""
+#        serializer.save()
 
-    def perform_create(self, serializer):
-        """Save the post data when creating a new MachineUser."""
-        serializer.save()
-
-class MachineUserDetailsView(generics.RetrieveUpdateDestroyAPIView):
-    """This class handles the http GET, PUT and DELETE requests."""
-    permission_classes = (IsAuthenticated,)
- 
-    queryset = MachineUser.objects.all()
-    serializer_class = MachineUserSerializer
+##class MachineUserDetailsView(generics.RetrieveUpdateDestroyAPIView):
+#   """This class handles the http GET, PUT and DELETE requests."""
+#    permission_classes = (IsAuthenticated,)
+# 
+#    queryset = MachineUser.objects.all()
+#    serializer_class = MachineUserSerializer
 
 class ReservationView(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""

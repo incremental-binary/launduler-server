@@ -15,16 +15,16 @@ class Place(models.Model):
     def __str__(self):
         return "{}".format(self.location)
 
-class MachineUser(models.Model):
-    """This class represents the alternative service model."""
-    userId = models.CharField(max_length=255, blank=False, unique=True)
-    email = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    location = models.ForeignKey(Place)
-
-    def __str__(self):
-        return "{}".format(self.userId)
+#class MachineUser(models.Model):
+#    """This class represents the alternative service model."""
+#    userId = models.CharField(max_length=255, blank=False, unique=True)
+#    email = models.CharField(max_length=255, unique=True)
+#    password = models.CharField(max_length=255)
+#    name = models.CharField(max_length=255)
+#    location = models.ForeignKey(Place)
+#
+#    def __str__(self):
+#        return "{}".format(self.userId)
 
 class Machine(models.Model):
     """This class represents the machine model."""
