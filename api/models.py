@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from datetime import datetime
+from time import localtime
 
 # Create your models here.
 
@@ -29,7 +30,6 @@ class Place(models.Model):
 class Machine(models.Model):
     """This class represents the machine model."""
     serialNum = models.CharField(max_length=255, blank=False, unique=True)
-    #location = models.CharField(max_length=255, blank=False, default='none')
     location = models.ForeignKey(Place)
     inUse = models.BooleanField(default=False)
     isBroken = models.BooleanField(default=False)
@@ -40,12 +40,13 @@ class Machine(models.Model):
 		
 class Reservation(models.Model):
     """This class represents the alternative service model."""
-    machine = models.ForeignKey(Machine)
+    machine = models.ForeignKey(Machine, related_name='reservations')
     scheduledAt = models.DateTimeField(default= datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     userId = models.ForeignKey('auth.user', to_field="username")
 
     def __str__(self):
-        return "{}".format(self.userId)
+        return "{}".format(self.id)
+   
 
 class Failure(models.Model):
     """This class represents the failure model."""

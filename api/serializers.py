@@ -1,18 +1,31 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from datetime import datetime
 from rest_framework import serializers
 from .models import Machine, Failure, Userguide, Alternative, Place, Reservation
 from rest_auth.registration.serializers import RegisterSerializer
 
+class ReservationSerializer(serializers.ModelSerializer):
+
+    scheduledAt = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False)
+    class Meta:
+        model = Reservation
+        fields = ('id', 'machine', 'scheduledAt', 'userId')
+
 class MachineSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
+    reservations = serializers.SerializerMethodField('get_reservation')
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = Machine
-        fields = ('id', 'serialNum', 'location', 'inUse', 'isBroken')
+        fields = ('id', 'serialNum', 'location', 'inUse', 'isBroken' ,'reservations')
         read_only_fields = ()
+
+    def get_reservation(self, machine):
+        items =Reservation.objects.filter(scheduledAt__gte = datetime.today(), machine=machine)
+        serializer = ReservationSerializer(instance=items, many=True)
+        return serializer.data
 
 class FailureSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,12 +53,6 @@ class PlaceSerializer(serializers.ModelSerializer):
 #        model = MachineUser
 #        fields = ('id', 'userId', 'email', 'password', 'name', 'location')
 
-class ReservationSerializer(serializers.ModelSerializer):
-
-    scheduledAt = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False)
-    class Meta:
-        model = Reservation
-        fields = ('id', 'machine', 'scheduledAt', 'userId')
 
 #class RegistrationSerializer(RegisterSerializer):
     #first_name = serializers.CharField(required=True)
