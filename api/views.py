@@ -97,7 +97,8 @@ class ReservationView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """By parameters"""
-        queryset = Reservation.objects.all()
+        queryset=Reservation.objects.order_by('scheduledAt')
+        # queryset = orderedReservation.objects.all()
         machine = self.request.query_params.get('machine', None)
         userId = self.request.query_params.get('userId', None)
         
@@ -105,7 +106,7 @@ class ReservationView(generics.ListCreateAPIView):
             queryset = queryset.filter(machine=machine)
         if userId is not None:
             queryset = queryset.filter(userId=userId)
-
+        
         return queryset
 
 class ReservationDetailsView(generics.RetrieveUpdateDestroyAPIView):
