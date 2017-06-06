@@ -41,9 +41,11 @@ class MachineUserSerializer(serializers.ModelSerializer):
         fields = ('id', 'userId', 'email', 'password', 'name', 'location')
 
 class ReservationSerializer(serializers.ModelSerializer):
+
+    scheduledAt = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False)
     class Meta:
         model = Reservation
-        fields = ('id', 'machine', 'date', 'userId')
+        fields = ('id', 'machine', 'scheduledAt', 'userId')
 
 #class RegistrationSerializer(RegisterSerializer):
     #first_name = serializers.CharField(required=True)

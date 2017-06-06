@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -40,7 +41,7 @@ class Machine(models.Model):
 class Reservation(models.Model):
     """This class represents the alternative service model."""
     machine = models.ForeignKey(Machine, to_field="serialNum")
-    date = models.CharField(max_length=255)
+    scheduledAt = models.DateTimeField(default= datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     userId = models.ForeignKey('auth.user', to_field="username")
 
     def __str__(self):
