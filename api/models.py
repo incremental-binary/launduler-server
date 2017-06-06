@@ -21,7 +21,7 @@ class MachineUser(models.Model):
     email = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    location = models.ForeignKey(Place, to_field="location")
+    location = models.ForeignKey(Place)
 
     def __str__(self):
         return "{}".format(self.userId)
@@ -30,7 +30,7 @@ class Machine(models.Model):
     """This class represents the machine model."""
     serialNum = models.CharField(max_length=255, blank=False, unique=True)
     #location = models.CharField(max_length=255, blank=False, default='none')
-    location = models.ForeignKey(Place, to_field="location")
+    location = models.ForeignKey(Place)
     inUse = models.BooleanField(default=False)
     isBroken = models.BooleanField(default=False)
 
@@ -40,16 +40,16 @@ class Machine(models.Model):
 		
 class Reservation(models.Model):
     """This class represents the alternative service model."""
-    machine = models.ForeignKey(Machine, to_field="serialNum")
+    machine = models.ForeignKey(Machine)
     scheduledAt = models.DateTimeField(default= datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     userId = models.ForeignKey('auth.user', to_field="username")
 
     def __str__(self):
-        return "{}".format(self.machine)
+        return "{}".format(self.userId)
 
 class Failure(models.Model):
     """This class represents the failure model."""
-    machine = models.ForeignKey(Machine, to_field="serialNum")
+    machine = models.ForeignKey(Machine)
     type = models.CharField(max_length=255, blank=False, default='none')
     comment = models.TextField()
     reporterId = models.ForeignKey('auth.user', to_field="username")
