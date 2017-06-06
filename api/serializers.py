@@ -27,7 +27,7 @@ class UserguideSerializer(serializers.ModelSerializer):
 class AlternativeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alternative
-        fields = ('id', 'serviceName', 'location', 'phoneNum', 'price')
+        fields = ('id', 'name', 'description', 'link')
 
 
 class PlaceSerializer(serializers.ModelSerializer):
