@@ -35,7 +35,7 @@ class Machine(models.Model):
 
     def __str__(self):
         """Return a human readable representation of the model instance."""
-        return "{}".format(self.serialNum)
+        return "{}: {}".format(self.location, self.serialNum)
 		
 class Reservation(models.Model):
     """This class represents the alternative service model."""
@@ -44,7 +44,7 @@ class Reservation(models.Model):
     userId = models.ForeignKey('auth.user', to_field="username")
 
     def __str__(self):
-        return "{}".format(self.id)
+        return "{} - {}".format(self.machine, self.scheduledAt)
    
 
 class Failure(models.Model):
@@ -56,7 +56,7 @@ class Failure(models.Model):
     isFixed = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{}".format(self.machine)
+        return "{}, {}".format(self.machine, self.comment)
 
 class Userguide(models.Model):
     """This class represents the userguide model."""
