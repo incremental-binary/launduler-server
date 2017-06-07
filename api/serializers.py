@@ -23,7 +23,9 @@ class MachineSerializer(serializers.ModelSerializer):
         read_only_fields = ()
 
     def get_reservation(self, machine):
-        items =Reservation.objects.filter(scheduledAt__gte = datetime.today(), machine=machine)
+        fdate = datetime.today()
+        fdate = fdate.replace(hour=0, minute=0, second=0, microsecond=0)
+        items =Reservation.objects.filter(scheduledAt__gte = fdate, machine=machine)
         serializer = ReservationSerializer(instance=items, many=True)
         return serializer.data
 
