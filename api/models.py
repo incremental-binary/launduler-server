@@ -32,7 +32,6 @@ class Machine(models.Model):
     serialNum = models.CharField(max_length=255, blank=False, unique=True)
     location = models.ForeignKey(Place)
     inUse = models.BooleanField(default=False)
-    isBroken = models.BooleanField(default=False)
 
     def __str__(self):
         """Return a human readable representation of the model instance."""

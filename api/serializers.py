@@ -15,6 +15,7 @@ class ReservationSerializer(serializers.ModelSerializer):
 class MachineSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
     reservations = serializers.SerializerMethodField('get_reservation')
+    isBroken = serializers.SerializerMethodField() #'get_isBroken' is redundant
 
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
@@ -28,6 +29,13 @@ class MachineSerializer(serializers.ModelSerializer):
         items =Reservation.objects.filter(scheduledAt__gte = fdate, machine=machine)
         serializer = ReservationSerializer(instance=items, many=True)
         return serializer.data
+
+    def get_isBroken(self, machine):
+        items = Failure.objects.filter(machine=machine, isFixed=False)
+        if items.count() == 0:
+            return False
+        else:
+            return True
 
 class FailureSerializer(serializers.ModelSerializer):
     class Meta:
